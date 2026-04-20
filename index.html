@@ -35,7 +35,7 @@
     .nine-grid { width: 100%; height: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; }
     .nine-grid th, .nine-grid td { border: 2px solid #fdba74; padding: 6px 2px; height: 80px; position: relative; vertical-align: middle; transition: all 0.3s; }
     
-    .header-u { background-color: #fca5a5; color: #7f1d1d; border: 3px solid #b91c1c !important; }
+    .header-s { background-color: #fca5a5; color: #7f1d1d; border: 3px solid #b91c1c !important; }
     .header-a, .header-b { background-color: #fed7aa; color: #9a3412; }
     .core-cell { background-color: #fef3c7; color: #854d0e; }
     
@@ -81,7 +81,7 @@
     /* 觀察按鈕群 */
     .obs-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; justify-content: center; }
     .obs-btn { font-size: 0.85rem; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; border: 2px solid transparent; }
-    .btn-u-def { background: #a855f7; color: white; border-color: #9333ea; }
+    .btn-s-def { background: #a855f7; color: white; border-color: #9333ea; }
     .btn-a-def { background: #22c55e; color: white; border-color: #16a34a; }
     .btn-b-def { background: #e11d48; color: white; border-color: #be123c; }
     .btn-core-def { background: #3b82f6; color: white; border-color: #2563eb; }
@@ -142,7 +142,7 @@
         <div class="table-wrapper">
             <table class="nine-grid" id="mainGrid">
             <tr>
-                <th class="header-u" id="cell-U"><div class="text-xs text-red-800 mb-1">總計 U</div><div id="disp-U"></div></th>
+                <th class="header-s" id="cell-S"><div class="text-xs text-red-800 mb-1">總計 S</div><div id="disp-S"></div></th>
                 <th class="header-a" id="cell-A"><div class="text-xs mb-1" id="lbl-A">事件 A</div><div id="disp-A"></div></th>
                 <th class="header-a" id="cell-A_prime"><div class="text-xs mb-1" id="lbl-A_prime">事件 A'</div><div id="disp-A_prime"></div></th>
             </tr>
@@ -176,7 +176,7 @@
         
         <div class="text-sm font-bold text-gray-700 mt-2 border-l-4 border-purple-500 pl-2">a. 四重視角 (和為1)</div>
         <div class="obs-group">
-          <button class="obs-btn btn-u-def" onclick="highlightObs('view', 1, this)">(1) 總計</button>
+          <button class="obs-btn btn-s-def" onclick="highlightObs('view', 1, this)">(1) 總計</button>
           <button class="obs-btn btn-a-def" onclick="highlightObs('view', 2, this)">(2) A + A'</button>
           <button class="obs-btn btn-b-def" onclick="highlightObs('view', 3, this)">(3) B + B'</button>
           <button class="obs-btn btn-core-def" onclick="highlightObs('view', 4, this)">(4) 核心區</button>
@@ -296,7 +296,7 @@
       document.getElementById('stepsContainer').appendChild(stat);
 
       await new Promise(r => setTimeout(r, 600));
-      document.getElementById('disp-U').innerHTML = renderDoubleFrac(1, 1, d.D, d.D); playSound(true);
+      document.getElementById('disp-S').innerHTML = renderDoubleFrac(1, 1, d.D, d.D); playSound(true);
       await new Promise(r => setTimeout(r, 800));
       document.getElementById('disp-A').innerHTML = renderDoubleFrac(d.nA, d.dA, d.nA, d.dA); playSound(true);
       await new Promise(r => setTimeout(r, 800));
@@ -407,23 +407,23 @@
                     <div class="flex flex-col gap-3">
                       <div class="bg-orange-50 p-2 rounded flex flex-wrap items-center gap-1">
                          <span>$P(A') = 1 - \\frac{${d.nA}}{${d.dA}} =$</span>
-                         <input type="number" id="inp-Aprime-o" class="tap-input w-12 text-blue-700 font-bold" placeholder="原" onfocus="doFocus({hl:['cell-U','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-o', 2)"> / ${d.dA} 
+                         <input type="number" id="inp-Aprime-o" class="tap-input w-12 text-blue-700 font-bold" placeholder="原" onfocus="doFocus({hl:['cell-S','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-o', 2)"> / ${d.dA} 
                          <button id="btn-inp-Aprime-o" onclick="checkField('inp-Aprime-o', 2)" class="btn btn-sub px-2 py-1 text-sm h-8">檢查</button>
                          <span id="msg-inp-Aprime-o"></span>
                          
                          <span class="font-bold text-gray-400 mx-1">=</span>
-                         <input type="number" id="inp-Aprime-e" class="tap-input w-14 text-gray-800 font-bold" placeholder="擴" disabled onfocus="doFocus({hl:['cell-U','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-e', 2)"> / ${d.D}
+                         <input type="number" id="inp-Aprime-e" class="tap-input w-14 text-gray-800 font-bold" placeholder="擴" disabled onfocus="doFocus({hl:['cell-S','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-e', 2)"> / ${d.D}
                          <button id="btn-inp-Aprime-e" onclick="checkField('inp-Aprime-e', 2)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
                          <span id="msg-inp-Aprime-e"></span>
                       </div>
                       <div class="bg-orange-50 p-2 rounded flex flex-wrap items-center gap-1">
                          <span>$P(B') = 1 - \\frac{${d.nB}}{${d.dB}} =$</span>
-                         <input type="number" id="inp-Bprime-o" class="tap-input w-12 text-blue-700 font-bold" placeholder="原" disabled onfocus="doFocus({hl:['cell-U','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-o', 2)"> / ${d.dB} 
+                         <input type="number" id="inp-Bprime-o" class="tap-input w-12 text-blue-700 font-bold" placeholder="原" disabled onfocus="doFocus({hl:['cell-S','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-o', 2)"> / ${d.dB} 
                          <button id="btn-inp-Bprime-o" onclick="checkField('inp-Bprime-o', 2)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
                          <span id="msg-inp-Bprime-o"></span>
                          
                          <span class="font-bold text-gray-400 mx-1">=</span>
-                         <input type="number" id="inp-Bprime-e" class="tap-input w-14 text-gray-800 font-bold" placeholder="擴" disabled onfocus="doFocus({hl:['cell-U','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-e', 2)"> / ${d.D}
+                         <input type="number" id="inp-Bprime-e" class="tap-input w-14 text-gray-800 font-bold" placeholder="擴" disabled onfocus="doFocus({hl:['cell-S','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-e', 2)"> / ${d.D}
                          <button id="btn-inp-Bprime-e" onclick="checkField('inp-Bprime-e', 2)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
                          <span id="msg-inp-Bprime-e"></span>
                       </div>
@@ -594,21 +594,21 @@
       btnEl.classList.add('active');
 
       if(category === 'view') {
-        if(type === 1) { document.getElementById('cell-U').classList.add('bg-purple-cell'); }
+        if(type === 1) { document.getElementById('cell-S').classList.add('bg-purple-cell'); }
         if(type === 2) { 
           ['cell-A', 'cell-A_prime'].forEach(id => document.getElementById(id).classList.add('bg-green-cell')); 
-          document.getElementById('cell-U').classList.add('bg-purple-cell');
-          document.querySelector('.btn-u-def').classList.add('active'); 
+          document.getElementById('cell-S').classList.add('bg-purple-cell');
+          document.querySelector('.btn-s-def').classList.add('active'); 
         }
         if(type === 3) { 
           ['cell-B', 'cell-B_prime'].forEach(id => document.getElementById(id).classList.add('bg-rose-cell')); 
-          document.getElementById('cell-U').classList.add('bg-purple-cell');
-          document.querySelector('.btn-u-def').classList.add('active');
+          document.getElementById('cell-S').classList.add('bg-purple-cell');
+          document.querySelector('.btn-s-def').classList.add('active');
         }
         if(type === 4) { 
           ['cell-A_int_B', 'cell-A_prime_int_B', 'cell-A_int_B_prime', 'cell-A_prime_int_B_prime'].forEach(id => document.getElementById(id).classList.add('bg-blue-cell')); 
-          document.getElementById('cell-U').classList.add('bg-purple-cell');
-          document.querySelector('.btn-u-def').classList.add('active');
+          document.getElementById('cell-S').classList.add('bg-purple-cell');
+          document.querySelector('.btn-s-def').classList.add('active');
         }
       } 
       else if(category === 'flow') {
