@@ -33,15 +33,16 @@
     .table-wrapper { position: relative; width: 100%; height: 100%; }
     
     .nine-grid { width: 100%; height: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; }
-    .nine-grid th, .nine-grid td { border: 2px solid #fdba74; padding: 6px 2px; height: 80px; position: relative; vertical-align: middle; transition: all 0.3s; }
+    .nine-grid th, .nine-grid td { border: 2px solid #fdba74; padding: 8px 2px; height: 90px; position: relative; vertical-align: middle; transition: all 0.3s; }
     
     .header-s { background-color: #fca5a5; color: #7f1d1d; border: 3px solid #b91c1c !important; }
     .header-a, .header-b { background-color: #fed7aa; color: #9a3412; }
     .core-cell { background-color: #fef3c7; color: #854d0e; }
     
-    /* 分數顯示 */
+    /* 分數顯示 (保持不變) */
     .frac-block { display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; }
     .frac-main { font-size: 1.25rem; font-weight: bold; }
+    .frac-sub { font-size: 1rem; font-weight: bold; color: #4b5563; }
     .frac-num { border-bottom: 2px solid currentColor; padding: 0 4px; padding-bottom: 2px;}
     .frac-den { padding: 0 4px; padding-top: 2px;}
 
@@ -94,8 +95,8 @@
     .btn-union { background: white; color: #ea580c; border-color: #fdba74; }
     .btn-union.active { background: #fff7ed; border-color: #ea580c; }
 
-    /* + 與 = 精準絕對定位 */
-    .math-overlay { position: absolute; font-size: 2.2rem; line-height: 0; font-weight: 900; color: #dc2626; text-shadow: 0 0 6px white, 0 0 6px white; z-index: 20; opacity: 0; transition: opacity 0.3s; pointer-events: none; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;}
+    /* + 與 = 精準絕對定位 (符號放大至 2.6rem) */
+    .math-overlay { position: absolute; font-size: 2.6rem; line-height: 0; font-weight: 900; color: #dc2626; text-shadow: 0 0 6px white, 0 0 6px white; z-index: 20; opacity: 0; transition: opacity 0.3s; pointer-events: none; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;}
     .math-overlay.show { opacity: 1; animation: popBounce 1s infinite alternate; }
     @keyframes popBounce { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.15); } }
     
@@ -142,17 +143,17 @@
         <div class="table-wrapper">
             <table class="nine-grid" id="mainGrid">
             <tr>
-                <th class="header-s" id="cell-S"><div class="text-xs text-red-800 mb-1">總計 S</div><div id="disp-S"></div></th>
-                <th class="header-a" id="cell-A"><div class="text-xs mb-1" id="lbl-A">事件 A</div><div id="disp-A"></div></th>
-                <th class="header-a" id="cell-A_prime"><div class="text-xs mb-1" id="lbl-A_prime">事件 A'</div><div id="disp-A_prime"></div></th>
+                <th class="header-s" id="cell-S"><div class="text-xl font-black text-red-800 mb-2 tracking-wide">樣本空間 S</div><div id="disp-S"></div></th>
+                <th class="header-a" id="cell-A"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-A">事件 A</div><div id="disp-A"></div></th>
+                <th class="header-a" id="cell-A_prime"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-A_prime">事件 A'</div><div id="disp-A_prime"></div></th>
             </tr>
             <tr>
-                <th class="header-b" id="cell-B"><div class="text-xs mb-1" id="lbl-B">事件 B</div><div id="disp-B"></div></th>
+                <th class="header-b" id="cell-B"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-B">事件 B</div><div id="disp-B"></div></th>
                 <td class="core-cell" id="cell-A_int_B"><div id="disp-A_int_B"></div></td>
                 <td class="core-cell" id="cell-A_prime_int_B"><div id="disp-A_prime_int_B"></div></td>
             </tr>
             <tr>
-                <th class="header-b" id="cell-B_prime"><div class="text-xs mb-1" id="lbl-B_prime">事件 B'</div><div id="disp-B_prime"></div></th>
+                <th class="header-b" id="cell-B_prime"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-B_prime">事件 B'</div><div id="disp-B_prime"></div></th>
                 <td class="core-cell" id="cell-A_int_B_prime"><div id="disp-A_int_B_prime"></div></td>
                 <td class="core-cell" id="cell-A_prime_int_B_prime"><div id="disp-A_prime_int_B_prime"></div></td>
             </tr>
