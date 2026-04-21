@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>獨立事件機率 - 九宮格視覺化教學</title>
+  <title>獨立事件機率 - 九宮格視覺化教學 (投影特大字版)</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, svg: { fontCache: 'global' } };
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, svg: { fontCache: 'global', scale: 1.3 } };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -25,29 +25,29 @@
       #right-panel { flex: 1 1 auto; overflow-y: auto; }
     }
 
-    #left-panel { background: linear-gradient(135deg, #fffaf0 0%, #ffedd5 100%); padding: 16px; display: flex; flex-direction: column; align-items: center;}
-    #right-panel { background-color: #fafaf9; padding: 16px; padding-bottom: 120px; }
+    #left-panel { background: linear-gradient(135deg, #fffaf0 0%, #ffedd5 100%); padding: 20px; display: flex; flex-direction: column; align-items: center;}
+    #right-panel { background-color: #fafaf9; padding: 24px; padding-bottom: 150px; }
 
-    /* --- 九宮格樣式 --- */
-    .grid-container { position: relative; margin-top: 10px; margin-bottom: 10px; width: 100%; max-width: 500px; background: white; border-radius: 12px; padding: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    /* --- 九宮格巨集樣式 --- */
+    .grid-container { position: relative; margin-top: 10px; margin-bottom: 10px; width: 100%; max-width: 600px; background: white; border-radius: 12px; padding: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
     .table-wrapper { position: relative; width: 100%; height: 100%; }
     
     .nine-grid { width: 100%; height: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; }
-    .nine-grid th, .nine-grid td { border: 2px solid #fdba74; padding: 8px 2px; height: 90px; position: relative; vertical-align: middle; transition: all 0.3s; }
+    .nine-grid th, .nine-grid td { border: 2px solid #fdba74; padding: 12px 4px; height: 130px; position: relative; vertical-align: middle; transition: all 0.3s; }
     
     .header-s { background-color: #fca5a5; color: #7f1d1d; border: 3px solid #b91c1c !important; }
     .header-a, .header-b { background-color: #fed7aa; color: #9a3412; }
     .core-cell { background-color: #fef3c7; color: #854d0e; }
     
-    /* 分數顯示 (保持不變) */
-    .frac-block { display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; }
-    .frac-main { font-size: 1.25rem; font-weight: bold; }
-    .frac-sub { font-size: 1rem; font-weight: bold; color: #4b5563; }
-    .frac-num { border-bottom: 2px solid currentColor; padding: 0 4px; padding-bottom: 2px;}
-    .frac-den { padding: 0 4px; padding-top: 2px;}
+    /* 分數顯示 (投影放大版) */
+    .frac-block { display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.15; }
+    .frac-main { font-size: 1.8rem; font-weight: bold; }
+    .frac-sub { font-size: 1.4rem; font-weight: bold; color: #4b5563; }
+    .frac-num { border-bottom: 3px solid currentColor; padding: 0 6px; padding-bottom: 4px;}
+    .frac-den { padding: 0 6px; padding-top: 4px;}
 
     /* 高光與動畫 */
-    .cell-focus { animation: pulseBorder 1.5s infinite; background-color: #fef08a !important; transform: scale(1.02); z-index: 5; box-shadow: 0 0 12px rgba(250, 204, 21, 0.6); }
+    .cell-focus { animation: pulseBorder 1.5s infinite; background-color: #fef08a !important; transform: scale(1.02); z-index: 5; box-shadow: 0 0 16px rgba(250, 204, 21, 0.7); }
     @keyframes pulseBorder { 0% { border-color: #eab308; } 50% { border-color: #f59e0b; } 100% { border-color: #eab308; } }
     
     .bg-purple-cell { background-color: #e9d5ff !important; color: #6b21a8 !important; border: 3px solid #a855f7 !important; }
@@ -58,45 +58,49 @@
     .flow-1-cell { background-color: #60a5fa !important; color: white !important; border-color: #2563eb !important; }
     .flow-2-cell { background-color: #bfdbfe !important; color: #1e3a8a !important; border-color: #60a5fa !important; }
     .flow-3-cell { background-color: #eff6ff !important; color: #1e3a8a !important; border-color: #bfdbfe !important; }
-    .check-mark::after { content: " ✓"; color: #dc2626; font-weight: bold; position: absolute; top: 2px; right: 4px; font-size: 1.2rem; }
+    .check-mark::after { content: " ✓"; color: #dc2626; font-weight: bold; position: absolute; top: 4px; right: 6px; font-size: 1.6rem; }
 
-    /* --- 輸入框與卡片 --- */
-    .step-card { background: white; border: 1px solid #fed7aa; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); opacity: 0; transform: translateY(15px); animation: slideUp 0.4s ease-out forwards; }
+    /* --- 輸入框與卡片 (右側互動區特大版) --- */
+    .step-card { background: white; border: 3px solid #fed7aa; border-radius: 16px; padding: 28px; margin-bottom: 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.06); opacity: 0; transform: translateY(15px); animation: slideUp 0.4s ease-out forwards; }
     @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
     .step-card.done { opacity: 0.65; background-color: #fffbeb; pointer-events: none; border-color: #fde68a; }
-    .step-title { font-weight: 700; color: #c2410c; font-size: 1.1rem; margin-bottom: 12px; border-bottom: 2px dashed #fed7aa; padding-bottom: 4px; }
     
-    .tap-input { height: 36px; font-size: 18px; text-align: center; border: 2px solid #fdba74; border-radius: 6px; outline: none; transition: all 0.2s; font-family: monospace; }
-    .tap-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2); }
-    .tap-input:disabled { background-color: #f3f4f6; color: #374151; }
+    /* 步驟標題再放大 */
+    .step-title { font-weight: 900; color: #c2410c; font-size: 2rem; margin-bottom: 20px; border-bottom: 3px dashed #fed7aa; padding-bottom: 12px; }
+    
+    /* 輸入框霸氣放大 */
+    .tap-input { height: 60px; font-size: 32px; text-align: center; border: 3px solid #fdba74; border-radius: 10px; outline: none; transition: all 0.2s; font-family: monospace; font-weight: bold; }
+    .tap-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.2); }
+    .tap-input:disabled { background-color: #f3f4f6; color: #374151; font-weight: 900;}
     .tap-input.error { border-color: #ef4444; background-color: #fef2f2; animation: shake 0.3s; }
-    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
     
-    .btn { border: none; border-radius: 6px; height: 36px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; justify-content: center; align-items: center; transition: all 0.2s; padding: 0 16px; }
-    .btn-main { background: linear-gradient(to right, #f59e0b, #ea580c); color: white; box-shadow: 0 2px 4px rgba(234, 88, 12, 0.3); }
-    .btn-main:hover { transform: translateY(-1px); box-shadow: 0 4px 6px rgba(234, 88, 12, 0.4); }
-    .btn-sub { background-color: white; color: #ea580c; border: 1px solid #fdba74; }
-    .btn-sub:hover:not(:disabled) { background-color: #fff7ed; }
+    /* 按鈕全面升級 */
+    .btn { border: none; border-radius: 10px; height: 54px; font-size: 1.4rem; font-weight: bold; cursor: pointer; display: inline-flex; justify-content: center; align-items: center; transition: all 0.2s; padding: 0 24px; }
+    .btn-main { background: linear-gradient(to right, #f59e0b, #ea580c); color: white; box-shadow: 0 4px 6px rgba(234, 88, 12, 0.3); font-size: 1.8rem; height: 68px; border-radius: 12px; padding: 0 32px;}
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(234, 88, 12, 0.4); }
+    .btn-sub { background-color: white; color: #ea580c; border: 3px solid #fdba74; }
+    .btn-sub:hover:not(:disabled) { background-color: #fff7ed; border-color: #f97316; }
     .btn-sub:disabled { background-color: #f3f4f6; color: #9ca3af; border-color: #d1d5db; cursor: not-allowed; }
 
-    /* 觀察按鈕群 */
-    .obs-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; justify-content: center; }
-    .obs-btn { font-size: 0.85rem; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; border: 2px solid transparent; }
+    /* 觀察按鈕群 (左側維持大尺寸) */
+    .obs-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; justify-content: center; }
+    .obs-btn { font-size: 1.2rem; padding: 10px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; border: 2px solid transparent; }
     .btn-s-def { background: #a855f7; color: white; border-color: #9333ea; }
     .btn-a-def { background: #22c55e; color: white; border-color: #16a34a; }
     .btn-b-def { background: #e11d48; color: white; border-color: #be123c; }
     .btn-core-def { background: #3b82f6; color: white; border-color: #2563eb; }
-    .obs-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-    .obs-btn.active { box-shadow: 0 0 0 3px rgba(0,0,0,0.2); transform: scale(1.05); }
+    .obs-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .obs-btn.active { box-shadow: 0 0 0 4px rgba(0,0,0,0.2); transform: scale(1.05); }
 
     .btn-f1 { background: #60a5fa; color: white; }
     .btn-f2 { background: #bfdbfe; color: #1e3a8a; }
     .btn-f3 { background: #eff6ff; color: #1e3a8a; border-color: #bfdbfe; }
-    .btn-union { background: white; color: #ea580c; border-color: #fdba74; }
+    .btn-union { background: white; color: #ea580c; border-color: #fdba74; border-width: 2px;}
     .btn-union.active { background: #fff7ed; border-color: #ea580c; }
 
-    /* + 與 = 精準絕對定位 (符號放大至 2.6rem) */
-    .math-overlay { position: absolute; font-size: 2.6rem; line-height: 0; font-weight: 900; color: #dc2626; text-shadow: 0 0 6px white, 0 0 6px white; z-index: 20; opacity: 0; transition: opacity 0.3s; pointer-events: none; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;}
+    /* + 與 = 精準絕對定位 (放大至 3.5rem) */
+    .math-overlay { position: absolute; font-size: 3.5rem; line-height: 0; font-weight: 900; color: #dc2626; text-shadow: 0 0 8px white, 0 0 8px white; z-index: 20; opacity: 0; transition: opacity 0.3s; pointer-events: none; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;}
     .math-overlay.show { opacity: 1; animation: popBounce 1s infinite alternate; }
     @keyframes popBounce { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.15); } }
     
@@ -110,50 +114,50 @@
     #sign-eq-v2 { left: 50%; top: 33.33%; }    #sign-plus-v2 { left: 50%; top: 66.66%; }
     #sign-eq-v3 { left: 83.33%; top: 33.33%; } #sign-plus-v3 { left: 83.33%; top: 66.66%; }
 
-    #top-nav { width: 100%; background: #ea580c; color: white; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 50; }
+    #top-nav { width: 100%; background: #ea580c; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 50; }
   </style>
 </head>
 <body>
 
   <div id="top-nav">
-    <div class="font-bold text-lg">獨立事件機率 - 視覺化解題</div>
-    <div class="flex gap-2">
-      <select id="probTypeSel" class="text-black rounded px-2 outline-none">
+    <div class="font-bold text-2xl">獨立事件機率 - 視覺化解題 (投影版)</div>
+    <div class="flex gap-3">
+      <select id="probTypeSel" class="text-black text-lg rounded px-3 outline-none py-1 font-bold">
         <option value="basic">基本題型</option>
         <option value="app">應用問題</option>
         <option value="random">隨機挑選</option>
       </select>
-      <button class="btn bg-white text-orange-600 hover:bg-gray-100 text-sm h-8" onclick="startLesson()">換題 / 重置</button>
+      <button class="btn bg-white text-orange-600 hover:bg-gray-100 text-xl h-12" onclick="startLesson()">換題 / 重置</button>
     </div>
   </div>
 
   <div id="app-container">
     <div id="left-panel">
-      <div class="w-full bg-orange-100 border-l-4 border-orange-500 p-3 rounded shadow-sm mb-4">
-        <p class="font-bold text-orange-800 text-sm mb-1">【獨立事件重點公式】</p>
-        <p class="text-sm text-gray-700">若 $A, B$ 互不影響，則交集機率為兩者相乘：</p>
-        <div class="text-center my-2 text-xl font-bold text-red-700 bg-white py-2 rounded shadow-inner">
+      <div class="w-full bg-orange-100 border-l-8 border-orange-500 p-4 rounded-lg shadow-sm mb-6">
+        <p class="font-bold text-orange-800 text-xl mb-2">【獨立事件重點公式】</p>
+        <p class="text-lg text-gray-700 font-bold">若 $A, B$ 互不影響，則交集機率為兩者相乘：</p>
+        <div class="text-center my-3 text-3xl font-black text-red-700 bg-white py-4 rounded-lg shadow-inner">
           $P(A \cap B) = P(A) \times P(B)$
         </div>
       </div>
 
-      <div id="problemArea" class="w-full bg-white border border-orange-200 p-4 rounded-xl shadow-sm mb-4 text-gray-800 leading-relaxed text-lg font-medium"></div>
+      <div id="problemArea" class="w-full bg-white border-2 border-orange-200 p-6 rounded-2xl shadow-md mb-6 text-gray-800 leading-relaxed text-2xl font-bold"></div>
 
       <div class="grid-container" id="grid-container">
         <div class="table-wrapper">
             <table class="nine-grid" id="mainGrid">
             <tr>
-                <th class="header-s" id="cell-S"><div class="text-xl font-black text-red-800 mb-2 tracking-wide">樣本空間 S</div><div id="disp-S"></div></th>
-                <th class="header-a" id="cell-A"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-A">事件 A</div><div id="disp-A"></div></th>
-                <th class="header-a" id="cell-A_prime"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-A_prime">事件 A'</div><div id="disp-A_prime"></div></th>
+                <th class="header-s" id="cell-S"><div class="text-2xl font-black text-red-800 mb-3 tracking-wide">樣本空間 S</div><div id="disp-S"></div></th>
+                <th class="header-a" id="cell-A"><div class="text-2xl font-black mb-3 tracking-wide" id="lbl-A">事件 A</div><div id="disp-A"></div></th>
+                <th class="header-a" id="cell-A_prime"><div class="text-2xl font-black mb-3 tracking-wide" id="lbl-A_prime">事件 A'</div><div id="disp-A_prime"></div></th>
             </tr>
             <tr>
-                <th class="header-b" id="cell-B"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-B">事件 B</div><div id="disp-B"></div></th>
+                <th class="header-b" id="cell-B"><div class="text-2xl font-black mb-3 tracking-wide" id="lbl-B">事件 B</div><div id="disp-B"></div></th>
                 <td class="core-cell" id="cell-A_int_B"><div id="disp-A_int_B"></div></td>
                 <td class="core-cell" id="cell-A_prime_int_B"><div id="disp-A_prime_int_B"></div></td>
             </tr>
             <tr>
-                <th class="header-b" id="cell-B_prime"><div class="text-xl font-black mb-2 tracking-wide" id="lbl-B_prime">事件 B'</div><div id="disp-B_prime"></div></th>
+                <th class="header-b" id="cell-B_prime"><div class="text-2xl font-black mb-3 tracking-wide" id="lbl-B_prime">事件 B'</div><div id="disp-B_prime"></div></th>
                 <td class="core-cell" id="cell-A_int_B_prime"><div id="disp-A_int_B_prime"></div></td>
                 <td class="core-cell" id="cell-A_prime_int_B_prime"><div id="disp-A_prime_int_B_prime"></div></td>
             </tr>
@@ -167,15 +171,15 @@
             <div id="sign-eq-v2" class="math-overlay"><span class="rotate-90">=</span></div><div id="sign-plus-v2" class="math-overlay">+</div>
             <div id="sign-eq-v3" class="math-overlay"><span class="rotate-90">=</span></div><div id="sign-plus-v3" class="math-overlay">+</div>
         </div>
-        <div class="text-center text-sm text-blue-800 mt-4 font-bold bg-blue-50 border border-blue-200 p-2 rounded shadow-sm">
+        <div class="text-center text-xl text-blue-800 mt-5 font-bold bg-blue-50 border border-blue-200 p-3 rounded-lg shadow-sm">
           二維九宮格：&lt;&lt;運算規則&gt;&gt; 每列：左 = 中 + 右，每欄：上 = 中 + 下
         </div>
       </div>
 
-      <div id="observationPanel" class="w-full bg-white border-2 border-dashed border-blue-400 p-4 rounded-xl shadow-md mt-4 hidden">
-        <p class="text-lg font-bold text-blue-800 text-center mb-3">👀 觀察區：點擊按鈕探索九宮格</p>
+      <div id="observationPanel" class="w-full bg-white border-4 border-dashed border-blue-400 p-6 rounded-2xl shadow-lg mt-6 hidden">
+        <p class="text-2xl font-bold text-blue-800 text-center mb-5">👀 觀察區：點擊按鈕探索九宮格</p>
         
-        <div class="text-sm font-bold text-gray-700 mt-2 border-l-4 border-purple-500 pl-2">a. 四重視角 (和為1)</div>
+        <div class="text-xl font-bold text-gray-700 mt-4 border-l-8 border-purple-500 pl-3">a. 四重視角 (和為1)</div>
         <div class="obs-group">
           <button class="obs-btn btn-s-def" onclick="highlightObs('view', 1, this)">(1) 總計</button>
           <button class="obs-btn btn-a-def" onclick="highlightObs('view', 2, this)">(2) A + A'</button>
@@ -183,14 +187,14 @@
           <button class="obs-btn btn-core-def" onclick="highlightObs('view', 4, this)">(4) 核心區</button>
         </div>
 
-        <div class="text-sm font-bold text-gray-700 mt-4 border-l-4 border-blue-500 pl-2">b. 視覺流向 (符合條件數)</div>
+        <div class="text-xl font-bold text-gray-700 mt-6 border-l-8 border-blue-500 pl-3">b. 視覺流向 (符合條件數)</div>
         <div class="obs-group">
           <button class="obs-btn btn-f1" onclick="highlightObs('flow', 1, this)">(1) 完全符合 (2個)</button>
           <button class="obs-btn btn-f2" onclick="highlightObs('flow', 2, this)">(2) 僅符合一個 (1個)</button>
           <button class="obs-btn btn-f3" onclick="highlightObs('flow', 3, this)">(3) 完全不符合 (0個)</button>
         </div>
         
-        <div class="text-sm font-bold text-gray-700 mt-4 border-l-4 border-orange-400 pl-2">c. 聯集區域 (L型區)</div>
+        <div class="text-xl font-bold text-gray-700 mt-6 border-l-8 border-orange-400 pl-3">c. 聯集區域 (L型區)</div>
         <div class="obs-group">
           <button class="obs-btn btn-union" onclick="highlightObs('union', 'A_B', this)">$A \cup B$</button>
           <button class="obs-btn btn-union" onclick="highlightObs('union', 'A_Bprime', this)">$A \cup B'$</button>
@@ -246,7 +250,7 @@
       const origHtml = `<div class="frac-block frac-main text-blue-700"><span class="frac-num">${origN}</span><span class="frac-den">${origD}</span></div>`;
       const expHtml = `<div class="frac-block frac-main text-gray-800"><span class="frac-num">${expN}</span><span class="frac-den">${expD}</span></div>`;
       if (origN === expN && origD === expD) return `<div class="flex justify-center items-center h-full">${origHtml}</div>`;
-      return `<div class="flex items-center justify-center gap-1.5 h-full">${origHtml} <span class="text-blue-500 font-bold">=</span> ${expHtml}</div>`;
+      return `<div class="flex items-center justify-center gap-3 h-full">${origHtml} <span class="text-blue-500 font-bold text-3xl">=</span> ${expHtml}</div>`;
     }
     
     function renderSingleFrac(n, den) {
@@ -268,8 +272,8 @@
       document.getElementById('lbl-A').innerText = prob.lblA; document.getElementById('lbl-A_prime').innerText = prob.lblA + " (否)";
       document.getElementById('lbl-B').innerText = prob.lblB; document.getElementById('lbl-B_prime').innerText = prob.lblB + " (否)";
 
-      let probHtml = prob.type === 'app' ? `<p class="mb-2">${prob.text}</p>` : `<p class="mb-2">設A,B為獨立事件，$P(A)=\\frac{${nA}}{${dA}}, P(B)=\\frac{${nB}}{${dB}}$。</p>`;
-      probHtml += `<p class="font-bold text-orange-700" id="final-q-text">📌 ${prob.qText}</p>`;
+      let probHtml = prob.type === 'app' ? `<p class="mb-4">${prob.text}</p>` : `<p class="mb-4">設A,B為獨立事件，$P(A)=\\frac{${nA}}{${dA}}, P(B)=\\frac{${nB}}{${dB}}$。</p>`;
+      probHtml += `<p class="font-black text-orange-700 text-4xl mt-6" id="final-q-text">📌 ${prob.qText}</p>`;
       document.getElementById('problemArea').innerHTML = probHtml;
     }
 
@@ -292,7 +296,7 @@
 
     async function runAutoFill() {
       const stat = document.createElement('div');
-      stat.className = "text-center font-bold text-blue-600 animate-pulse my-4";
+      stat.className = "text-center font-bold text-blue-600 animate-pulse my-6 text-3xl";
       stat.innerText = "正在填入已知機率 (整理原始數值)...";
       document.getElementById('stepsContainer').appendChild(stat);
 
@@ -328,12 +332,12 @@
         if(val === cfg.ans) {
             playSound(true);
             el.disabled = true; el.style.borderColor = "#22c55e"; el.classList.remove('error');
-            if(msgEl) msgEl.innerHTML = `<span class="text-green-600 text-sm font-bold ml-1">✓</span>`;
+            if(msgEl) msgEl.innerHTML = `<span class="text-green-600 text-2xl font-bold ml-2">✓</span>`;
             
             if(btnEl) {
                 btnEl.disabled = true;
                 btnEl.innerText = "正確";
-                btnEl.className = "btn bg-green-100 text-green-700 font-bold border-0 px-2 py-1 mx-1 cursor-default text-sm h-8";
+                btnEl.className = "btn bg-green-100 text-green-700 font-bold border-0 px-4 py-2 mx-2 cursor-default text-xl";
             }
             
             if(cfg.onCorrect) cfg.onCorrect();
@@ -364,7 +368,7 @@
         } else {
             playSound(false);
             el.classList.add('error');
-            if(msgEl) msgEl.innerHTML = `<span class="text-red-600 text-sm font-bold ml-1">✗</span>`;
+            if(msgEl) msgEl.innerHTML = `<span class="text-red-600 text-2xl font-bold ml-2">✗</span>`;
             setTimeout(() => el.classList.remove('error'), 300);
         }
     }
@@ -382,54 +386,54 @@
 
         if(idx === 1) {
             html = `<div class="step-title">Step 1：將已知數擴分</div>
-                    <p class="text-sm text-gray-700 mb-3">請將 A 與 B 擴分為共同分母 <strong class="text-red-600">${d.D}</strong>，輸入完可按 <kbd class="bg-gray-100 border border-gray-300 px-1 rounded shadow-sm text-xs">Enter</kbd> 檢查。</p>
-                    <div class="flex flex-col gap-3">
-                      <div class="bg-orange-50 p-2 rounded flex flex-wrap items-center gap-2">
-                         <span class="w-16 text-right">事件 A：</span> $\\frac{${d.nA}}{${d.dA}} = $ 
-                         <input type="number" id="inp-expA" class="tap-input w-16 text-gray-800 font-bold" onfocus="doFocus({hl:['cell-A']})" onkeydown="handleKey(event, 'inp-expA', 1)"> / ${d.D}
-                         <button id="btn-inp-expA" onclick="checkField('inp-expA', 1)" class="btn btn-sub px-2 py-1 text-sm h-8 ml-1">檢查</button>
+                    <p class="text-2xl text-gray-700 mb-5 leading-relaxed font-bold">請將 A 與 B 擴分為共同分母 <strong class="text-red-600 text-3xl">${d.D}</strong>，輸入完可按 <kbd class="bg-gray-100 border-2 border-gray-300 px-2 rounded-lg shadow-sm text-xl">Enter</kbd> 檢查。</p>
+                    <div class="flex flex-col gap-5">
+                      <div class="bg-orange-50 p-5 rounded-2xl flex flex-wrap items-center gap-3 text-3xl">
+                         <span class="w-32 text-right font-bold">事件 A：</span> $\\frac{${d.nA}}{${d.dA}} = $ 
+                         <input type="number" id="inp-expA" class="tap-input w-24 text-gray-800" onfocus="doFocus({hl:['cell-A']})" onkeydown="handleKey(event, 'inp-expA', 1)"> / ${d.D}
+                         <button id="btn-inp-expA" onclick="checkField('inp-expA', 1)" class="btn btn-sub ml-3">檢查</button>
                          <span id="msg-inp-expA"></span>
                       </div>
-                      <div class="bg-orange-50 p-2 rounded flex flex-wrap items-center gap-2">
-                         <span class="w-16 text-right">事件 B：</span> $\\frac{${d.nB}}{${d.dB}} = $ 
-                         <input type="number" id="inp-expB" class="tap-input w-16 text-gray-800 font-bold" disabled onfocus="doFocus({hl:['cell-B']})" onkeydown="handleKey(event, 'inp-expB', 1)"> / ${d.D}
-                         <button id="btn-inp-expB" onclick="checkField('inp-expB', 1)" class="btn btn-sub px-2 py-1 text-sm h-8 ml-1" disabled>檢查</button>
+                      <div class="bg-orange-50 p-5 rounded-2xl flex flex-wrap items-center gap-3 text-3xl">
+                         <span class="w-32 text-right font-bold">事件 B：</span> $\\frac{${d.nB}}{${d.dB}} = $ 
+                         <input type="number" id="inp-expB" class="tap-input w-24 text-gray-800" disabled onfocus="doFocus({hl:['cell-B']})" onkeydown="handleKey(event, 'inp-expB', 1)"> / ${d.D}
+                         <button id="btn-inp-expB" onclick="checkField('inp-expB', 1)" class="btn btn-sub ml-3" disabled>檢查</button>
                          <span id="msg-inp-expB"></span>
                       </div>
                     </div>
-                    <div class="text-right mt-3 hidden" id="next-btn-1"><button class="btn btn-main" onclick="advanceStep(1)">進入下一步 (Enter)</button></div>`;
+                    <div class="text-right mt-6 hidden" id="next-btn-1"><button class="btn btn-main" onclick="advanceStep(1)">進入下一步 (Enter)</button></div>`;
             
             fieldConfigs['inp-expA'] = { ans: d.N_A, nextInp: 'inp-expB', onCorrect: () => document.getElementById('disp-A').innerHTML = renderDoubleFrac(d.nA, d.dA, d.N_A, d.D) };
             fieldConfigs['inp-expB'] = { ans: d.N_B, onCorrect: () => document.getElementById('disp-B').innerHTML = renderDoubleFrac(d.nB, d.dB, d.N_B, d.D) };
         }
         else if(idx === 2) {
             html = `<div class="step-title">Step 2：單一事件區邊界補齊</div>
-                    <p class="text-sm text-gray-700 mb-3">利用「總計 = 發生 + 不發生」，算出 A' 與 B'。<br><strong class="text-blue-600">請先填藍色的原始分子，檢查正確後再填擴分分子！</strong></p>
-                    <div class="flex flex-col gap-3">
-                      <div class="bg-orange-50 p-2 rounded flex flex-wrap items-center gap-1">
+                    <p class="text-2xl text-gray-700 mb-5 leading-relaxed font-bold">利用「總計 = 發生 + 不發生」，算出 A' 與 B'。<br><strong class="text-blue-600">請先填藍色的原始分子，檢查正確後再填擴分分子！</strong></p>
+                    <div class="flex flex-col gap-5">
+                      <div class="bg-orange-50 p-5 rounded-2xl flex flex-wrap items-center gap-3 text-3xl">
                          <span>$P(A') = 1 - \\frac{${d.nA}}{${d.dA}} =$</span>
-                         <input type="number" id="inp-Aprime-o" class="tap-input w-12 text-blue-700 font-bold" placeholder="原" onfocus="doFocus({hl:['cell-S','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-o', 2)"> / ${d.dA} 
-                         <button id="btn-inp-Aprime-o" onclick="checkField('inp-Aprime-o', 2)" class="btn btn-sub px-2 py-1 text-sm h-8">檢查</button>
+                         <input type="number" id="inp-Aprime-o" class="tap-input w-20 text-blue-700" placeholder="原" onfocus="doFocus({hl:['cell-S','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-o', 2)"> / ${d.dA} 
+                         <button id="btn-inp-Aprime-o" onclick="checkField('inp-Aprime-o', 2)" class="btn btn-sub mx-2">檢查</button>
                          <span id="msg-inp-Aprime-o"></span>
                          
-                         <span class="font-bold text-gray-400 mx-1">=</span>
-                         <input type="number" id="inp-Aprime-e" class="tap-input w-14 text-gray-800 font-bold" placeholder="擴" disabled onfocus="doFocus({hl:['cell-S','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-e', 2)"> / ${d.D}
-                         <button id="btn-inp-Aprime-e" onclick="checkField('inp-Aprime-e', 2)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
+                         <span class="font-black text-gray-400 mx-3">=</span>
+                         <input type="number" id="inp-Aprime-e" class="tap-input w-24 text-gray-800" placeholder="擴" disabled onfocus="doFocus({hl:['cell-S','cell-A','cell-A_prime'], signs:['sign-eq-h1','sign-plus-h1']})" onkeydown="handleKey(event, 'inp-Aprime-e', 2)"> / ${d.D}
+                         <button id="btn-inp-Aprime-e" onclick="checkField('inp-Aprime-e', 2)" class="btn btn-sub mx-2" disabled>檢查</button>
                          <span id="msg-inp-Aprime-e"></span>
                       </div>
-                      <div class="bg-orange-50 p-2 rounded flex flex-wrap items-center gap-1">
+                      <div class="bg-orange-50 p-5 rounded-2xl flex flex-wrap items-center gap-3 text-3xl">
                          <span>$P(B') = 1 - \\frac{${d.nB}}{${d.dB}} =$</span>
-                         <input type="number" id="inp-Bprime-o" class="tap-input w-12 text-blue-700 font-bold" placeholder="原" disabled onfocus="doFocus({hl:['cell-S','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-o', 2)"> / ${d.dB} 
-                         <button id="btn-inp-Bprime-o" onclick="checkField('inp-Bprime-o', 2)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
+                         <input type="number" id="inp-Bprime-o" class="tap-input w-20 text-blue-700" placeholder="原" disabled onfocus="doFocus({hl:['cell-S','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-o', 2)"> / ${d.dB} 
+                         <button id="btn-inp-Bprime-o" onclick="checkField('inp-Bprime-o', 2)" class="btn btn-sub mx-2" disabled>檢查</button>
                          <span id="msg-inp-Bprime-o"></span>
                          
-                         <span class="font-bold text-gray-400 mx-1">=</span>
-                         <input type="number" id="inp-Bprime-e" class="tap-input w-14 text-gray-800 font-bold" placeholder="擴" disabled onfocus="doFocus({hl:['cell-S','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-e', 2)"> / ${d.D}
-                         <button id="btn-inp-Bprime-e" onclick="checkField('inp-Bprime-e', 2)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
+                         <span class="font-black text-gray-400 mx-3">=</span>
+                         <input type="number" id="inp-Bprime-e" class="tap-input w-24 text-gray-800" placeholder="擴" disabled onfocus="doFocus({hl:['cell-S','cell-B','cell-B_prime'], signs:['sign-eq-v1','sign-plus-v1']})" onkeydown="handleKey(event, 'inp-Bprime-e', 2)"> / ${d.D}
+                         <button id="btn-inp-Bprime-e" onclick="checkField('inp-Bprime-e', 2)" class="btn btn-sub mx-2" disabled>檢查</button>
                          <span id="msg-inp-Bprime-e"></span>
                       </div>
                     </div>
-                    <div class="text-right mt-3 hidden" id="next-btn-2"><button class="btn btn-main" onclick="advanceStep(2)">進入下一步 (Enter)</button></div>`;
+                    <div class="text-right mt-6 hidden" id="next-btn-2"><button class="btn btn-main" onclick="advanceStep(2)">進入下一步 (Enter)</button></div>`;
             
             fieldConfigs['inp-Aprime-o'] = { ans: d.nA_p, nextInp: 'inp-Aprime-e' };
             fieldConfigs['inp-Aprime-e'] = { ans: d.N_A_prime, nextInp: 'inp-Bprime-o', onCorrect: () => document.getElementById('disp-A_prime').innerHTML = renderDoubleFrac(d.nA_p, d.dA, d.N_A_prime, d.D) };
@@ -438,38 +442,38 @@
         }
         else if(idx === 3) {
             html = `<div class="step-title">Step 3：破解核心交集 & 剩餘九宮格</div>
-                    <p class="text-sm text-gray-700 mb-2">由於事件獨立，<strong class="text-red-600">任何交集分子皆可由兩原始分子相乘</strong>得到！<br>你可利用相乘、也可利用加減法把剩下填滿。</p>
-                    <div class="flex flex-col gap-2 bg-orange-50 p-3 rounded text-sm">
-                      <div class="flex flex-wrap items-center gap-2 mb-2 border-b border-orange-200 pb-2">
-                        <span class="font-bold text-red-700">左上格：</span> 
-                        <input type="number" id="inp-AintB" class="tap-input w-16" onfocus="doFocus({hl:['cell-A','cell-B','cell-A_int_B']})" onkeydown="handleKey(event, 'inp-AintB', 3)"> / ${d.D}
-                        <button id="btn-inp-AintB" onclick="checkField('inp-AintB', 3)" class="btn btn-sub px-2 py-1 text-sm h-8">檢查</button>
-                        <span class="text-sm text-blue-700 font-bold ml-1">提示： $\\frac{${d.nA}}{${d.dA}} \\times \\frac{${d.nB}}{${d.dB}}$</span>
+                    <p class="text-2xl text-gray-700 mb-5 leading-relaxed font-bold">由於事件獨立，<strong class="text-red-600">任何交集分子皆可由兩原始分子相乘</strong>得到！<br>你可利用相乘、也可利用加減法把剩下填滿。</p>
+                    <div class="flex flex-col gap-6 bg-orange-50 p-6 rounded-2xl text-3xl">
+                      <div class="flex flex-wrap items-center gap-3 mb-2 border-b-4 border-orange-200 pb-5">
+                        <span class="font-bold text-red-700 w-32">左上格：</span> 
+                        <input type="number" id="inp-AintB" class="tap-input w-24" onfocus="doFocus({hl:['cell-A','cell-B','cell-A_int_B']})" onkeydown="handleKey(event, 'inp-AintB', 3)"> / ${d.D}
+                        <button id="btn-inp-AintB" onclick="checkField('inp-AintB', 3)" class="btn btn-sub ml-2">檢查</button>
+                        <span class="text-2xl text-blue-700 font-bold ml-3">提示： $\\frac{${d.nA}}{${d.dA}} \\times \\frac{${d.nB}}{${d.dB}}$</span>
                         <span id="msg-inp-AintB"></span>
                       </div>
-                      <div class="flex flex-wrap items-center gap-2">
-                        <span class="w-16">左下格：</span>
-                        <input type="number" id="inp-LL" class="tap-input w-16" disabled onfocus="doFocus({hl:['cell-A','cell-A_int_B','cell-A_int_B_prime'], signs:['sign-eq-v2','sign-plus-v2']})" onkeydown="handleKey(event, 'inp-LL', 3)"> / ${d.D} 
-                        <button id="btn-inp-LL" onclick="checkField('inp-LL', 3)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
-                        <span class="text-sm text-blue-700 font-bold ml-1">或相乘： $\\frac{${d.nA}}{${d.dA}} \\times \\frac{${d.nB_p}}{${d.dB}}$</span>
+                      <div class="flex flex-wrap items-center gap-3 mb-2">
+                        <span class="w-32 font-bold">左下格：</span>
+                        <input type="number" id="inp-LL" class="tap-input w-24" disabled onfocus="doFocus({hl:['cell-A','cell-A_int_B','cell-A_int_B_prime'], signs:['sign-eq-v2','sign-plus-v2']})" onkeydown="handleKey(event, 'inp-LL', 3)"> / ${d.D} 
+                        <button id="btn-inp-LL" onclick="checkField('inp-LL', 3)" class="btn btn-sub ml-2" disabled>檢查</button>
+                        <span class="text-2xl text-blue-700 font-bold ml-3">或相乘： $\\frac{${d.nA}}{${d.dA}} \\times \\frac{${d.nB_p}}{${d.dB}}$</span>
                         <span id="msg-inp-LL"></span>
                       </div>
-                      <div class="flex flex-wrap items-center gap-2">
-                        <span class="w-16">右上格：</span>
-                        <input type="number" id="inp-TR" class="tap-input w-16" disabled onfocus="doFocus({hl:['cell-B','cell-A_int_B','cell-A_prime_int_B'], signs:['sign-eq-h2','sign-plus-h2']})" onkeydown="handleKey(event, 'inp-TR', 3)"> / ${d.D} 
-                        <button id="btn-inp-TR" onclick="checkField('inp-TR', 3)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
-                        <span class="text-sm text-blue-700 font-bold ml-1">或相乘： $\\frac{${d.nA_p}}{${d.dA}} \\times \\frac{${d.nB}}{${d.dB}}$</span>
+                      <div class="flex flex-wrap items-center gap-3 mb-2">
+                        <span class="w-32 font-bold">右上格：</span>
+                        <input type="number" id="inp-TR" class="tap-input w-24" disabled onfocus="doFocus({hl:['cell-B','cell-A_int_B','cell-A_prime_int_B'], signs:['sign-eq-h2','sign-plus-h2']})" onkeydown="handleKey(event, 'inp-TR', 3)"> / ${d.D} 
+                        <button id="btn-inp-TR" onclick="checkField('inp-TR', 3)" class="btn btn-sub ml-2" disabled>檢查</button>
+                        <span class="text-2xl text-blue-700 font-bold ml-3">或相乘： $\\frac{${d.nA_p}}{${d.dA}} \\times \\frac{${d.nB}}{${d.dB}}$</span>
                         <span id="msg-inp-TR"></span>
                       </div>
-                      <div class="flex flex-wrap items-center gap-2">
-                        <span class="w-16">右下格：</span>
-                        <input type="number" id="inp-BR" class="tap-input w-16" disabled onfocus="doFocus({hl:['cell-A_prime','cell-B_prime','cell-A_prime_int_B','cell-A_int_B_prime','cell-A_prime_int_B_prime'], signs:['sign-eq-v3','sign-plus-v3','sign-eq-h3','sign-plus-h3']})" onkeydown="handleKey(event, 'inp-BR', 3)"> / ${d.D} 
-                        <button id="btn-inp-BR" onclick="checkField('inp-BR', 3)" class="btn btn-sub px-2 py-1 text-sm h-8" disabled>檢查</button>
-                        <span class="text-sm text-blue-700 font-bold ml-1">或相乘： $\\frac{${d.nA_p}}{${d.dA}} \\times \\frac{${d.nB_p}}{${d.dB}}$</span>
+                      <div class="flex flex-wrap items-center gap-3">
+                        <span class="w-32 font-bold">右下格：</span>
+                        <input type="number" id="inp-BR" class="tap-input w-24" disabled onfocus="doFocus({hl:['cell-A_prime','cell-B_prime','cell-A_prime_int_B','cell-A_int_B_prime','cell-A_prime_int_B_prime'], signs:['sign-eq-v3','sign-plus-v3','sign-eq-h3','sign-plus-h3']})" onkeydown="handleKey(event, 'inp-BR', 3)"> / ${d.D} 
+                        <button id="btn-inp-BR" onclick="checkField('inp-BR', 3)" class="btn btn-sub ml-2" disabled>檢查</button>
+                        <span class="text-2xl text-blue-700 font-bold ml-3">或相乘： $\\frac{${d.nA_p}}{${d.dA}} \\times \\frac{${d.nB_p}}{${d.dB}}$</span>
                         <span id="msg-inp-BR"></span>
                       </div>
                     </div>
-                    <div class="text-right mt-3 hidden" id="next-btn-3"><button class="btn btn-main" onclick="advanceStep(3)">開始觀察與作答 (Enter)</button></div>`;
+                    <div class="text-right mt-6 hidden" id="next-btn-3"><button class="btn btn-main" onclick="advanceStep(3)">開始觀察與作答 (Enter)</button></div>`;
             
             fieldConfigs['inp-AintB'] = { ans: d.N_A_int_B, nextInp: 'inp-LL', onCorrect: () => document.getElementById('disp-A_int_B').innerHTML = renderSingleFrac(d.N_A_int_B, d.D) };
             fieldConfigs['inp-LL'] = { ans: d.N_A_int_B_prime, nextInp: 'inp-TR', onCorrect: () => document.getElementById('disp-A_int_B_prime').innerHTML = renderSingleFrac(d.N_A_int_B_prime, d.D) };
@@ -481,26 +485,26 @@
             let problemDesc = d.prob.text || `已知事件 A 與事件 B 互為獨立事件，且 $P(A)=\\frac{${d.nA}}{${d.dA}}, P(B)=\\frac{${d.nB}}{${d.dB}}$。`;
             
             html = `<div class="step-title text-blue-700 border-blue-300">Step 4：回答問題</div>
-                    <div class="text-sm text-gray-700 mb-3 bg-white p-3 rounded-lg border border-blue-200 shadow-sm leading-relaxed">
-                       <strong class="text-blue-800">📝 題目回顧：</strong><br>${problemDesc}
+                    <div class="text-2xl text-gray-700 mb-5 bg-white p-5 rounded-2xl border-4 border-blue-200 shadow-sm leading-relaxed font-bold">
+                       <strong class="text-blue-800 text-3xl">📝 題目回顧：</strong><br>${problemDesc}
                     </div>
-                    <p class="text-sm text-gray-700 mb-3">請先在左方<strong class="text-blue-600">👀 觀察區</strong>體會九宮格，完成後回答問題：</p>
-                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                      <div class="font-bold text-orange-700 mb-3 text-lg" id="final-q-text-2">${d.prob.qText}</div>
-                      <div class="flex flex-wrap items-center gap-2 mb-2">
+                    <p class="text-2xl text-gray-700 mb-5 font-bold">請先在左方<strong class="text-blue-600 text-3xl">👀 觀察區</strong>體會九宮格，完成後回答問題：</p>
+                    <div class="bg-blue-50 p-6 rounded-2xl border-4 border-blue-300">
+                      <div class="font-black text-orange-700 mb-6 text-4xl" id="final-q-text-2">${d.prob.qText}</div>
+                      <div class="flex flex-wrap items-center gap-4 mb-4 text-3xl">
                         <span class="font-bold">初步答案分子：</span>
-                        <input type="number" id="inp-fin-exp" class="tap-input w-20" onfocus="clearHighlights();hideSigns();" onkeydown="handleFinalExp(event)"> / ${d.D}
-                        <button id="btn-fin-exp" class="btn btn-sub px-3 py-1 text-sm ml-2" onclick="handleFinalExp({key:'Enter'})">檢查</button>
+                        <input type="number" id="inp-fin-exp" class="tap-input w-28" onfocus="clearHighlights();hideSigns();" onkeydown="handleFinalExp(event)"> / ${d.D}
+                        <button id="btn-fin-exp" class="btn btn-sub px-5 py-3 ml-4 h-14 text-xl" onclick="handleFinalExp({key:'Enter'})">檢查</button>
                       </div>
-                      <div id="final-res-1" class="text-sm font-bold mt-1 mb-2"></div>
+                      <div id="final-res-1" class="text-2xl font-bold mt-3 mb-5"></div>
                       
-                      <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-blue-200 hidden" id="final-part-2">
+                      <div class="flex flex-wrap items-center gap-4 mt-6 pt-6 border-t-4 border-blue-200 hidden text-3xl" id="final-part-2">
                         <span class="font-bold text-red-600">請約分為最簡分數：</span>
-                        <input type="number" id="inp-fin-simp-n" class="tap-input w-14" onkeydown="handleFinalSimp(event)"> / 
-                        <input type="number" id="inp-fin-simp-d" class="tap-input w-14" onkeydown="handleFinalSimp(event)">
-                        <button id="btn-fin-simp" class="btn btn-sub px-3 py-1 text-sm ml-2" onclick="handleFinalSimp({key:'Enter'})">檢查</button>
+                        <input type="number" id="inp-fin-simp-n" class="tap-input w-24" onkeydown="handleFinalSimp(event)"> / 
+                        <input type="number" id="inp-fin-simp-d" class="tap-input w-24" onkeydown="handleFinalSimp(event)">
+                        <button id="btn-fin-simp" class="btn btn-sub px-5 py-3 ml-4 h-14 text-xl" onclick="handleFinalSimp({key:'Enter'})">檢查</button>
                       </div>
-                      <div id="final-res-2" class="text-lg font-bold mt-2"></div>
+                      <div id="final-res-2" class="text-4xl font-black mt-6"></div>
                     </div>`;
         }
 
@@ -532,7 +536,7 @@
             if(val === targetAnsN) {
                 playSound(true);
                 el.disabled = true; el.style.borderColor = "#22c55e";
-                btn.disabled = true; btn.innerText = "正確"; btn.className = "btn bg-green-100 text-green-700 font-bold border-0 px-3 py-1 ml-2 cursor-default text-sm";
+                btn.disabled = true; btn.innerText = "正確"; btn.className = "btn bg-green-100 text-green-700 font-bold border-0 px-5 py-3 ml-4 cursor-default h-14 text-xl";
                 document.getElementById('final-res-1').innerHTML = `<span class="text-green-600">✓ 找對格子了！</span>`;
                 
                 let g = gcd(targetAnsN, d.D);
@@ -540,7 +544,7 @@
                     document.getElementById('final-part-2').classList.remove('hidden');
                     document.getElementById('inp-fin-simp-n').focus();
                 } else {
-                    document.getElementById('final-res-2').innerHTML = `<span class="text-green-600">🎉 恭喜完成本題！</span><br><button class="btn btn-main mt-4" onclick="startLesson()">再練一題</button>`;
+                    document.getElementById('final-res-2').innerHTML = `<span class="text-green-600">🎉 恭喜完成本題！</span><br><button class="btn btn-main mt-6" onclick="startLesson()">再練一題</button>`;
                 }
             } else {
                 playSound(false);
@@ -567,8 +571,8 @@
                 playSound(true);
                 elN.disabled = true; elD.disabled = true;
                 elN.style.borderColor = "#22c55e"; elD.style.borderColor = "#22c55e";
-                btn.disabled = true; btn.innerText = "正確"; btn.className = "btn bg-green-100 text-green-700 font-bold border-0 px-3 py-1 ml-2 cursor-default text-sm";
-                document.getElementById('final-res-2').innerHTML = `<span class="text-green-600">🎉 完美約分！恭喜完成！</span><br><button class="btn btn-main mt-4" onclick="startLesson()">再練一題</button>`;
+                btn.disabled = true; btn.innerText = "正確"; btn.className = "btn bg-green-100 text-green-700 font-bold border-0 px-5 py-3 ml-4 cursor-default h-14 text-xl";
+                document.getElementById('final-res-2').innerHTML = `<span class="text-green-600">🎉 完美約分！恭喜完成！</span><br><button class="btn btn-main mt-6" onclick="startLesson()">再練一題</button>`;
             } else {
                 playSound(false);
                 if(vN !== sN) elN.classList.add('error');
